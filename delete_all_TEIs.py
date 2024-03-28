@@ -1,8 +1,9 @@
+##### Soft Delete TEIs #####
 import requests
 
-base_url = 'endpoint_url'
-username = "username"
-password = "password"
+base_url = 'https://fhir.demo.hispsrilanka.org/dhis/api/'
+username = 'dcadmin'
+password = 'Admin@Dhar123'
 
 # Fetch organization units
 org_units_url = base_url + 'organisationUnits.json'
