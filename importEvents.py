@@ -10,11 +10,11 @@ username = 'dcadmin'
 password = 'Admin@Dhar123'
 
 # Read the JSON file
-with open('NewEvents.json', 'r') as file:
+with open('ds4/NewEvents.json', 'r') as file:
     data = json.load(file)
 
 # Split the data into chunks (e.g., size 100)
-chunk_size = 25
+chunk_size = 10
 chunks = [data['events'][i:i + chunk_size] for i in range(0, len(data['events']), chunk_size)]
 
 # Iterate over chunks and send requests
@@ -30,7 +30,7 @@ for chunk in chunks:
     
     # Send POST request
     response = requests.post(url, headers=headers, json={'events': chunk})
-    
+    print(response.json())
     # Check response status
     if response.status_code == 200:
         print(f"Successfully inserted {len(chunk)} events")

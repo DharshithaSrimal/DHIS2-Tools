@@ -10,11 +10,11 @@ username = 'dcadmin'
 password = 'Admin@Dhar123'
 
 # Read the JSON file
-with open('NewEnrollments.json', 'r') as file:
+with open('ds4/NewEnrollments.json', 'r') as file:
     data = json.load(file)
 
 # Split the data into chunks (e.g., size 100)
-chunk_size = 150
+chunk_size = 25
 chunks = [data['enrollments'][i:i + chunk_size] for i in range(0, len(data['enrollments']), chunk_size)]
 
 # Iterate over chunks and send requests

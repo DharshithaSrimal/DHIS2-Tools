@@ -6,15 +6,18 @@ import base64
 
 # Endpoint and credentials
 url = 'https://fhir.demo.hispsrilanka.org/dhis/api/trackedEntityInstances'
+# url = 'http://localhost:8084/dhis/api/trackedEntityInstances'
+# username = 'admin'
+# password = 'district'
 username = 'dcadmin'
 password = 'Admin@Dhar123'
 
 # Read the JSON file
-with open('NewTrackedEntityInstances.json', 'r') as file:
+with open('ds3/NewTrackedEntityInstances.json', 'r') as file:
     data = json.load(file)
 
 # Split the data into chunks (e.g., size 50)
-chunk_size = 50
+chunk_size = 10
 chunks = [data['trackedEntityInstances'][i:i + chunk_size] for i in range(0, len(data['trackedEntityInstances']), chunk_size)]
 
 # Iterate over chunks and send requests
