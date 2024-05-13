@@ -1,0 +1,9 @@
+age_ =IF(Z2="",DATEDIF(AA2,TODAY(),"Y"),Z2)
+ageClass_ ==IF(AB2<45,"Ageless45",IF(AND(AB2>=45,AB2<=54),"45to54",IF(AND(AB2>=55,AB2<=64),"55to64","65orAbove")))
+gender=UPPER(LEFT(Y2,1))&LOWER(MID(Y2,2,LEN(Y2)))
+Prescription of medication DM oral_
+=IF(N2="Glibenclamide", N2, IF(N2="Metformin", "Metformin ", IF(N2="Sitagliptin", N2, "")))
+=IF(OR(N2="Amlodipine", N2="Atenolol", N2="Captopril", N2="Carvedilol", N2="Hydralazine", N2="Lisinopril", N2="Losartan", N2="Methyldopa", A2="Aspirin", A2="Atorvastatin", N2="Diltiazem", N2="Enalapril maleate", N2="Glyceryl trinitrate", N2="Hydrochlorothiazide", N2="ISMN", N2="Nifedipine", N2="Prazosin", N2="Propranolol", N2="Spironolactone"), N2, "")
+=IF(OR(O2="Amlodipine", O2="Atenolol", O2="Captopril", O2="Carvedilol", O2="Hydralazine", O2="Lisinopril", O2="Losartan", O2="Methyldopa", O2="Aspirin", O2="Atorvastatin", O2="Diltiazem", O2="Enalapril maleate", O2="Glyceryl trinitrate", O2="Hydrochlorothiazide", O2="ISMN", O2="Nifedipine", O2="Prazosin", O2="Propranolol", O2="Spironolactone"), O2, "")
+
+=IF(N2="Insulin", "Insulinshortacting", IF(N2="Mixtard Insulin", "Insulinlongacting", IF(N2="M Insulin", "Insulinlongacting", IF(N2="M.Insulin", "Insulinlongacting", ""))))
