@@ -5,17 +5,18 @@ import json
 import base64
 
 # Endpoint and credentials
-url = 'https://fhir.demo.hispsrilanka.org/dhis/api/enrollments'
-username = 'dcadmin'
+url = 'https://172.31.32.231/dhis/api/enrollments'
+username = 'dharshitha'
 password = 'Admin@Dhar123'
 
 # Read the JSON file
-with open('ds4/NewEnrollments.json', 'r') as file:
+with open('set4/NewEnrollments (1).json', 'r') as file:
     data = json.load(file)
 
 # Split the data into chunks (e.g., size 100)
-chunk_size = 25
+chunk_size = 1
 chunks = [data['enrollments'][i:i + chunk_size] for i in range(0, len(data['enrollments']), chunk_size)]
+failed_ids = []  # List to store failed trackedEntityIds
 
 # Iterate over chunks and send requests
 for chunk in chunks:
@@ -29,10 +30,20 @@ for chunk in chunks:
     }
     
     # Send POST request
-    response = requests.post(url, headers=headers, json={'enrollments': chunk})
+    response = requests.post(url + '?upsert=true', headers=headers, json={'enrollments': chunk}, verify=False)
     
     # Check response status
-    if response.status_code == 200:
+    if response.status_code == 201:
         print(f"Successfully inserted {len(chunk)} enrollments")
     else:
+        # Log the failed enrollments to the file
+        for tei in chunk:
+            failed_ids.append(tei['trackedEntityInstance'])
         print(f"Failed to insert enrollments. Status code: {response.status_code}, Response: {response.text}")
+
+# Write failed trackedEntityIds to a file
+with open('failedEnrollments4.txt', 'w') as file:
+    for failed_id in failed_ids:
+        file.write(failed_id + '\n')
+
+print("Failed enrollments written to failedEnrollments4.txt")
